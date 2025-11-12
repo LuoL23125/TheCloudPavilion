@@ -5,460 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Cloud Pavilion Wellness Centre - Premium Health & Wellness Services</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #2c6e49;
-            --secondary-color: #52b788;
-            --accent-color: #95d5b2;
-            --light-bg: #f8f9fa;
-            --text-dark: #212529;
-            --text-light: #6c757d;
-            --white: #ffffff;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            cursor: pointer;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-dark);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            cursor: pointer;
-        }
-
-        .mobile-menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-dark);
-            transition: all 0.3s ease;
-        }
-
-        /* Hero Section */
-        .hero {
-            margin-top: 70px;
-            min-height: 90vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('img/front.jpg');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: float 20s linear infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
-        }
-
-        .hero-content {
-            text-align: center;
-            z-index: 1;
-            padding: 2rem;
-            max-width: 800px;
-            animation: fadeInUp 1s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            color: var(--white);
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
-        }
-
-        .btn-primary {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: var(--white);
-            color: var(--primary-color);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Services Section */
-        .services {
-            padding: 5rem 2rem;
-            background: var(--light-bg);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-light);
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .service-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-card h3 {
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .service-card p {
-            color: var(--text-light);
-            line-height: 1.8;
-        }
-
-        /* About Section */
-        .about {
-            padding: 5rem 2rem;
-            background: var(--white);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .about-text h2 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-        }
-
-        .about-text p {
-            color: var(--text-light);
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-image {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-        }
-
-        .about-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 5rem 2rem;
-            background: var(--light-bg);
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--white);
-            padding: 3rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--white);
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-2px);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--text-dark);
-            color: var(--white);
-            padding: 3rem 2rem 1rem;
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .social-links a {
-            color: var(--white);
-            font-size: 1.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: var(--white);
-                flex-direction: column;
-                padding: 1rem;
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu-toggle {
-                display: flex;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Loading Animation */
-        .page-transition {
-            animation: pageLoad 0.5s ease;
-        }
-
-        @keyframes pageLoad {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -488,8 +35,8 @@
             <p>Dedicated to holistic health and professional wellness guidance</p>
             
             <!-- Insurance Badge -->
-            <div style="background: rgba(255, 255, 255, 0.95); padding: 0.8rem 1.5rem; border-radius: 50px; display: inline-block; margin-bottom: 1.5rem; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);">
-                <span style="color: var(--primary-color); font-weight: 600; font-size: 1rem;">
+            <div class="insurance-badge">
+                <span class="insurance-text">
                     ✓ Insurance Accepted
                 </span>
             </div>
@@ -544,94 +91,132 @@
     </section>
 
     <!-- Pricing Section -->
-    <section class="pricing" id="pricing" style="padding: 5rem 2rem; background: var(--white);">
+    <section class="pricing" id="pricing">
         <div class="container">
             <h2 class="section-title">Our Pricing</h2>
             <p class="section-subtitle">Transparent pricing for all our wellness services</p>
 
-            <div style="max-width: 900px; margin: 3rem auto; background: var(--light-bg); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);">
+            <!-- Cash Price Table -->
+            <div class="price-table">
                 
                 <!-- Individual Services -->
-                <div style="padding: 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: var(--white);">
-                    <h3 style="margin: 0; font-size: 1.5rem; text-align: center;">Individual Services</h3>
+                <div class="price-header primary-gradient">
+                    <h3>Individual Services - Cash Price</h3>
                 </div>
                 
-                <table style="width: 100%; border-collapse: collapse; background: var(--white);">
-                    <tr style="border-bottom: 1px solid #e0e0e0;">
-                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">Tuina (60 mins)</td>
-                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">$45</td>
+                <table class="price-list">
+                    <tr>
+                        <td class="service-name">Tuina (60 mins)</td>
+                        <td class="service-price">$45</td>
                     </tr>
-                    <tr style="border-bottom: 1px solid #e0e0e0; background: var(--light-bg);">
-                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">Foot Reflexology (45 mins)</td>
-                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">$30</td>
+                    <tr class="alt-row">
+                        <td class="service-name">Foot Reflexology (45 mins)</td>
+                        <td class="service-price">$30</td>
                     </tr>
-                    <tr style="border-bottom: 1px solid #e0e0e0;">
-                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">Osteopathic Treatment (60 mins)</td>
-                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">$80</td>
+                    <tr>
+                        <td class="service-name">Osteopathic Treatment (60 mins)</td>
+                        <td class="service-price">$80</td>
                     </tr>
-                    <tr style="border-bottom: 1px solid #e0e0e0; background: var(--light-bg);">
-                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">Shiatsu (60 mins)</td>
-                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">$65</td>
+                    <tr class="alt-row">
+                        <td class="service-name">Shiatsu (60 mins)</td>
+                        <td class="service-price">$65</td>
                     </tr>
-                    <tr style="border-bottom: 1px solid #e0e0e0;">
-                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">Cupping (30 mins)</td>
-                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">$35</td>
+                    <tr>
+                        <td class="service-name">Cupping (30 mins)</td>
+                        <td class="service-price">$35</td>
                     </tr>
-                    <tr style="border-bottom: 1px solid #e0e0e0; background: var(--light-bg);">
-                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">Scraping/Gua Sha (30 mins)</td>
-                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">$35</td>
+                    <tr class="alt-row">
+                        <td class="service-name">Scraping/Gua Sha (30 mins)</td>
+                        <td class="service-price">$35</td>
                     </tr>
-                    <tr style="border-bottom: 1px solid #e0e0e0;">
-                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">Acupuncture (60 mins)</td>
-                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">$90</td>
+                    <tr>
+                        <td class="service-name">Acupuncture (60 mins)</td>
+                        <td class="service-price">$90</td>
                     </tr>
                 </table>
 
                 <!-- Combination Packages -->
-                <div style="padding: 2rem; background: linear-gradient(135deg, var(--secondary-color), var(--accent-color)); color: var(--white); margin-top: 2rem;">
-                    <h3 style="margin: 0; font-size: 1.5rem; text-align: center;">Combination Packages</h3>
+                <div class="price-header secondary-gradient">
+                    <h3>Combination Packages - Cash Price</h3>
                 </div>
                 
-                <table style="width: 100%; border-collapse: collapse; background: var(--white);">
-                    <tr style="border-bottom: 1px solid #e0e0e0;">
-                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">
-                            45 mins Foot Reflexology + 30 mins Tuina
-                        </td>
-                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--secondary-color); font-weight: 600; font-size: 1.2rem;">$55</td>
+                <table class="price-list">
+                    <tr>
+                        <td class="service-name">45 mins Foot Reflexology + 30 mins Tuina</td>
+                        <td class="service-price secondary">$55</td>
                     </tr>
-                    <tr style="border-bottom: 1px solid #e0e0e0; background: var(--light-bg);">
-                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">
-                            45 mins Foot Reflexology + 45 mins Tuina
-                        </td>
-                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--secondary-color); font-weight: 600; font-size: 1.2rem;">$65</td>
+                    <tr class="alt-row">
+                        <td class="service-name">45 mins Foot Reflexology + 45 mins Tuina</td>
+                        <td class="service-price secondary">$65</td>
                     </tr>
-                    <tr style="border-bottom: 1px solid #e0e0e0;">
-                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">
-                            45 mins Foot Reflexology + 60 mins Tuina
-                        </td>
-                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--secondary-color); font-weight: 600; font-size: 1.2rem;">$75</td>
+                    <tr>
+                        <td class="service-name">45 mins Foot Reflexology + 60 mins Tuina</td>
+                        <td class="service-price secondary">$75</td>
                     </tr>
-                    <tr style="border-bottom: 1px solid #e0e0e0; background: var(--light-bg);">
-                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">
-                            Acupuncture + Cupping (90 mins total)
-                        </td>
-                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--secondary-color); font-weight: 600; font-size: 1.2rem;">$110</td>
+                    <tr class="alt-row">
+                        <td class="service-name">Acupuncture + Cupping (90 mins total)</td>
+                        <td class="service-price secondary">$110</td>
                     </tr>
+                </table>
+            </div>
+
+            <!-- Insurance Price Table -->
+            <div class="price-table insurance-table">
+                
+                <!-- Insurance Services Header -->
+                <div class="price-header insurance-gradient">
+                    <h3>💳 Insurance Coverage Rates</h3>
+                    <p>Most major insurance plans accepted - Contact us for verification</p>
+                </div>
+                
+                <table class="price-list">
+                    <thead>
+                        <tr class="table-header">
+                            <th>Service</th>
+                            <th>Coverage</th>
+                            <th>Co-pay</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="service-name">Registered Massage Therapy (RMT)</td>
+                            <td class="coverage-rate">80-100%</td>
+                            <td class="copay-amount">$0-20</td>
+                        </tr>
+                        <tr class="alt-row">
+                            <td class="service-name">Acupuncture (Licensed)</td>
+                            <td class="coverage-rate">70-100%</td>
+                            <td class="copay-amount">$0-25</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">Osteopathic Treatment</td>
+                            <td class="coverage-rate">60-80%</td>
+                            <td class="copay-amount">$15-35</td>
+                        </tr>
+                        <tr class="alt-row">
+                            <td class="service-name">Traditional Chinese Medicine</td>
+                            <td class="coverage-rate">50-80%</td>
+                            <td class="copay-amount">$10-30</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">Reflexology (if covered)</td>
+                            <td class="coverage-rate">Varies</td>
+                            <td class="copay-amount">$15-30</td>
+                        </tr>
+                    </tbody>
                 </table>
 
                 <!-- Insurance Notice -->
-                <div style="padding: 2rem; background: var(--light-bg); text-align: center; border-top: 2px solid var(--accent-color);">
-                    <p style="color: var(--primary-color); font-weight: 600; margin-bottom: 0.5rem; font-size: 1.1rem;">
-                        ✓ Insurance Accepted
-                    </p>
-                    <p style="color: var(--text-light); margin: 0;">
-                        We accept most major insurance plans. Please contact us for verification.
+                <div class="insurance-notice">
+                    <p class="notice-title">📋 <strong>Direct Billing Available</strong> for most insurance providers</p>
+                    <p class="notice-text">
+                        Coverage varies by insurance plan. Please bring your insurance card to your first visit.<br>
+                        We'll verify your coverage and explain your benefits before treatment.
                     </p>
                 </div>
             </div>
         </div>
     </section>
-
 
     <!-- About Section -->
     <section class="about" id="about">
@@ -650,7 +235,6 @@
             <div class="about-image">
                 <img src="./img/price.jpg" alt="Wellness Services">
             </div>
-
         </div>
     </section>
 
@@ -660,31 +244,31 @@
             <h2 class="section-title">Contact Us</h2>
             <p class="section-subtitle">Schedule a consultation and begin your wellness journey</p>
 
-            <div style="max-width: 600px; margin: 0 auto; background: var(--white); padding: 3rem; border-radius: 15px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); text-align: center;">
-                <div style="margin-bottom: 2rem;">
-                    <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.5rem;">📍 Visit Us</h3>
-                    <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 1rem;">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>📍 Location</h3>
+                    <p class="contact-detail">
                         8 Glen Watford Dr G55<br>
                         Scarborough, ON, M1S 2C1<br>
                         Canada
                     </p>
                     <a href="https://www.google.com/maps/search/?api=1&query=8+Glen+Watford+Dr+G55+Scarborough+ON+M1S+2C1" 
                        target="_blank" 
-                       style="display: inline-block; padding: 0.8rem 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: var(--white); text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);">
+                       class="btn-directions">
                         📍 Get Directions
                     </a>
                 </div>
 
-                <div style="margin-bottom: 2rem;">
-                    <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.5rem;">📞 Call Us</h3>
-                    <a href="tel:+14162924035" style="color: var(--secondary-color); font-size: 1.5rem; text-decoration: none; font-weight: 600; transition: color 0.3s ease;">
+                <div class="contact-item">
+                    <h3>📞 Phone</h3>
+                    <a href="tel:+14162924035" class="phone-number">
                         (416) 292-4035
                     </a>
                 </div>
 
-                <div>
-                    <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.5rem;">🕐 Hours</h3>
-                    <p style="color: var(--text-light); line-height: 1.8;">
+                <div class="contact-item">
+                    <h3>🕐 Business Hours</h3>
+                    <p class="contact-detail">
                         Monday - Friday: 9:00 AM - 8:00 PM<br>
                         Saturday: 9:00 AM - 6:00 PM<br>
                         Sunday: 10:00 AM - 5:00 PM
@@ -704,65 +288,11 @@
                 <a href="#">📱</a>
                 <a href="#">💬</a>
             </div>
-            <p style="margin-top: 2rem; opacity: 0.7;">© 2025 The Cloud Pavilion Wellness Centre. All rights reserved.</p>
+            <p class="copyright">© 2025 The Cloud Pavilion Wellness Centre. All rights reserved.</p>
         </div>
     </footer>
 
-    <script>
-        // Mobile menu toggle
-        const mobileMenu = document.getElementById('mobileMenu');
-        const navLinks = document.getElementById('navLinks');
-
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    // Close mobile menu if open
-                    navLinks.classList.remove('active');
-                }
-            });
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-                navbar.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.15)';
-            } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-            }
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 1s ease forwards';
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements
-        document.querySelectorAll('.service-card').forEach(el => observer.observe(el));
-        document.querySelectorAll('.about-text').forEach(el => observer.observe(el));
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
