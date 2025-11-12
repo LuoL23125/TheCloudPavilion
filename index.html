@@ -257,18 +257,6 @@
             transform: scaleX(1);
         }
 
-        .service-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1.5rem;
-            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-        }
-
         .service-card h3 {
             color: var(--text-dark);
             margin-bottom: 1rem;
@@ -312,13 +300,13 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         /* Contact Section */
@@ -481,6 +469,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
+                <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -497,6 +486,14 @@
         <div class="hero-content">
             <h1>Welcome to The Cloud Pavilion Wellness Centre</h1>
             <p>Dedicated to holistic health and professional wellness guidance</p>
+            
+            <!-- Insurance Badge -->
+            <div style="background: rgba(255, 255, 255, 0.95); padding: 0.8rem 1.5rem; border-radius: 50px; display: inline-block; margin-bottom: 1.5rem; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);">
+                <span style="color: var(--primary-color); font-weight: 600; font-size: 1rem;">
+                    ✓ Insurance Accepted
+                </span>
+            </div>
+            
             <a href="#services" class="btn-primary">Explore Services</a>
         </div>
     </section>
@@ -509,50 +506,131 @@
 
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">🧘</div>
-                    <h3>Yoga & Meditation</h3>
-                    <p>Professional yoga classes and meditation guidance to help you achieve mind-body balance, reduce
-                        stress, and enhance quality of life.</p>
+                    <h3>Tuina</h3>
+                    <p>Traditional Chinese therapeutic massage that uses rhythmic compression along energy channels to promote healing and restore balance.</p>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-icon">🌿</div>
-                    <h3>Traditional Medicine</h3>
-                    <p>Personalized health management combining traditional Eastern medicine principles to improve
-                        constitution and prevent illness.</p>
+                    <h3>Osteopathic</h3>
+                    <p>Hands-on treatment focusing on the musculoskeletal system to improve mobility, relieve pain, and support overall body health.</p>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-icon">🍃</div>
-                    <h3>Nutrition Counseling</h3>
-                    <p>Expert nutritionists create customized meal plans with scientific nutrition combinations for
-                        healthy and delicious eating.</p>
+                    <h3>Shiatsu</h3>
+                    <p>Japanese pressure point therapy that applies finger pressure to specific points to balance energy flow and promote healing.</p>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-icon">💆</div>
-                    <h3>Massage</h3>
-                    <p>Professional massage therapy to relieve fatigue, improve circulation, and promote complete
-                        relaxation of body and mind.</p>
+                    <h3>Foot Reflexology</h3>
+                    <p>Specialized foot massage targeting reflex points that correspond to different body organs and systems for improved wellness.</p>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-icon">🏃</div>
-                    <h3>Sports Recovery</h3>
-                    <p>Expert sports rehabilitation guidance to help you exercise safely and effectively while building
-                        physical strength.</p>
+                    <h3>Scraping (Gua Sha)</h3>
+                    <p>Traditional healing technique using smooth-edged tools to improve circulation, release muscle tension, and promote detoxification.</p>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-icon">🧠</div>
-                    <h3>Mental Wellness</h3>
-                    <p>Professional counseling services to support mental health, manage emotions, and improve
-                        psychological well-being.</p>
+                    <h3>Cupping</h3>
+                    <p>Ancient therapy using suction cups to increase blood flow, reduce inflammation, and relieve muscle tension and pain.</p>
+                </div>
+
+                <div class="service-card">
+                    <h3>Acupuncture</h3>
+                    <p>Traditional Chinese medicine technique using fine needles at specific points to restore energy balance and promote natural healing.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing" style="padding: 5rem 2rem; background: var(--white);">
+        <div class="container">
+            <h2 class="section-title">Our Pricing</h2>
+            <p class="section-subtitle">Transparent pricing for all our wellness services</p>
+
+            <div style="max-width: 900px; margin: 3rem auto; background: var(--light-bg); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);">
+                
+                <!-- Individual Services -->
+                <div style="padding: 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: var(--white);">
+                    <h3 style="margin: 0; font-size: 1.5rem; text-align: center;">Individual Services</h3>
+                </div>
+                
+                <table style="width: 100%; border-collapse: collapse; background: var(--white);">
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">Tuina (60 mins)</td>
+                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">$45</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0; background: var(--light-bg);">
+                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">Foot Reflexology (45 mins)</td>
+                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">$30</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">Osteopathic Treatment (60 mins)</td>
+                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">$80</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0; background: var(--light-bg);">
+                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">Shiatsu (60 mins)</td>
+                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">$65</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">Cupping (30 mins)</td>
+                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">$35</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0; background: var(--light-bg);">
+                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">Scraping/Gua Sha (30 mins)</td>
+                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">$35</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">Acupuncture (60 mins)</td>
+                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">$90</td>
+                    </tr>
+                </table>
+
+                <!-- Combination Packages -->
+                <div style="padding: 2rem; background: linear-gradient(135deg, var(--secondary-color), var(--accent-color)); color: var(--white); margin-top: 2rem;">
+                    <h3 style="margin: 0; font-size: 1.5rem; text-align: center;">Combination Packages</h3>
+                </div>
+                
+                <table style="width: 100%; border-collapse: collapse; background: var(--white);">
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">
+                            45 mins Foot Reflexology + 30 mins Tuina
+                        </td>
+                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--secondary-color); font-weight: 600; font-size: 1.2rem;">$55</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0; background: var(--light-bg);">
+                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">
+                            45 mins Foot Reflexology + 45 mins Tuina
+                        </td>
+                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--secondary-color); font-weight: 600; font-size: 1.2rem;">$65</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">
+                            45 mins Foot Reflexology + 60 mins Tuina
+                        </td>
+                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--secondary-color); font-weight: 600; font-size: 1.2rem;">$75</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0; background: var(--light-bg);">
+                        <td style="padding: 1.2rem 2rem; font-weight: 600; color: var(--text-dark);">
+                            Acupuncture + Cupping (90 mins total)
+                        </td>
+                        <td style="padding: 1.2rem 2rem; text-align: right; color: var(--secondary-color); font-weight: 600; font-size: 1.2rem;">$110</td>
+                    </tr>
+                </table>
+
+                <!-- Insurance Notice -->
+                <div style="padding: 2rem; background: var(--light-bg); text-align: center; border-top: 2px solid var(--accent-color);">
+                    <p style="color: var(--primary-color); font-weight: 600; margin-bottom: 0.5rem; font-size: 1.1rem;">
+                        ✓ Insurance Accepted
+                    </p>
+                    <p style="color: var(--text-light); margin: 0;">
+                        We accept most major insurance plans. Please contact us for verification.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     <!-- About Section -->
@@ -569,7 +647,7 @@
                 <p>At The Cloud Pavilion Wellness Centre, we believe health is not merely the absence of illness, but the harmonious unity
                     of body, mind, and spirit. Join us on this beautiful journey toward optimal wellness.</p>
             </div>
-            <div>
+            <div class="about-image">
                 <img src="./img/price.jpg" alt="Wellness Services">
             </div>
 
@@ -579,11 +657,12 @@
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
-           
-            
+            <h2 class="section-title">Contact Us</h2>
+            <p class="section-subtitle">Schedule a consultation and begin your wellness journey</p>
+
             <div style="max-width: 600px; margin: 0 auto; background: var(--white); padding: 3rem; border-radius: 15px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); text-align: center;">
                 <div style="margin-bottom: 2rem;">
-                    <h1 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.5rem;">📍Visit Us At</h1>
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.5rem;">📍 Visit Us</h3>
                     <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 1rem;">
                         8 Glen Watford Dr G55<br>
                         Scarborough, ON, M1S 2C1<br>
