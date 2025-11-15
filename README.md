@@ -14,9 +14,8 @@ The Cloud Pavilion Wellness Centre is a professional health and wellness facilit
 
 ## 🕐 Business Hours
 
-- **Monday - Friday:** 9:00 AM - 8:00 PM
-- **Saturday:** 9:00 AM - 6:00 PM  
-- **Sunday:** 10:00 AM - 5:00 PM
+- **Monday - Sunday:** 10:00 AM - 9:30 PM
+
 
 ## 💆 Our Services
 
