@@ -111,6 +111,7 @@
     <button class="btn-add" onclick="showAddModal()">＋ 员工</button>
     <button class="btn-customer" id="customerBtn" onclick="customerArrived()">👤 来客人了</button>
     <button class="btn-appt" onclick="showApptModal()">📅 预约</button>
+    <button class="btn-add" onclick="showAddHistory()">📝 补录</button>
     <button class="btn-clear" onclick="clearToday()">🗑</button>
   </div>
 
@@ -167,6 +168,22 @@
         <button onclick="closeModal('historyModal')" style="background:none;border:none;color:white;font-size:24px;cursor:pointer">✕</button>
       </div>
       <div class="modal-scroll" id="historyList"></div>
+    </div>
+  </div>
+
+  <div class="modal" id="addHistoryModal" style="display:none">
+    <div class="modal-box">
+      <h2>📝 补录已完成服务</h2>
+      <label class="form-label">选择技师</label>
+      <select id="historyStaff"><option value="">-- 请选择 --</option></select>
+      <label class="form-label">开始时间</label>
+      <input type="time" id="historyStart">
+      <label class="form-label">结束时间</label>
+      <input type="time" id="historyEnd">
+      <div class="modal-btns">
+        <button class="btn-cancel" onclick="closeModal('addHistoryModal')">取消</button>
+        <button class="btn-confirm" onclick="addHistoryRecord()">确定补录</button>
+      </div>
     </div>
   </div>
 
@@ -467,6 +484,53 @@
     }
 
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+    function showAddHistory() {
+      document.getElementById('historyStart').value = '';
+      document.getElementById('historyEnd').value = '';
+      
+      let opts = '<option value="">-- 请选择 --</option>';
+      staff.forEach(s => { opts += `<option value="${s.id}">${s.name}</option>`; });
+      document.getElementById('historyStaff').innerHTML = opts;
+      
+      document.getElementById('addHistoryModal').style.display = 'flex';
+    }
+
+    function addHistoryRecord() {
+      const staffId = parseInt(document.getElementById('historyStaff').value);
+      const startTime = document.getElementById('historyStart').value;
+      const endTime = document.getElementById('historyEnd').value;
+      
+      if (!staffId || !startTime || !endTime) {
+        alert('请填写完整信息');
+        return;
+      }
+      
+      const s = staff.find(x => x.id === staffId);
+      const [sh, sm] = startTime.split(':').map(Number);
+      const [eh, em] = endTime.split(':').map(Number);
+      const duration = ((eh * 60 + em) - (sh * 60 + sm)) / 60;
+      
+      if (duration <= 0) {
+        alert('结束时间必须晚于开始时间');
+        return;
+      }
+      
+      history.push({
+        id: Date.now(),
+        staffName: s.name,
+        duration: duration,
+        startTime: startTime,
+        endTime: endTime,
+        date: today()
+      });
+      
+      // 更新该员工的 lastFinished 让他排到后面
+      staff = staff.map(x => x.id === staffId ? {...x, lastFinished: Date.now()} : x);
+      
+      save(); render();
+      closeModal('addHistoryModal');
+    }
 
     load();
     render();
