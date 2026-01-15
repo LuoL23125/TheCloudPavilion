@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>云亭排班</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: linear-gradient(to bottom, #0f172a, #1e293b); color: white; min-height: 100vh; }
+    .header { background: rgba(15,23,42,0.9); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; }
+    .header h1 { font-size: 28px; font-weight: bold; }
+    .header .sub { color: #94a3b8; font-size: 16px; }
+    .clock { text-align: right; }
+    .clock .time { font-size: 36px; font-weight: 300; }
+    .clock .date { color: #94a3b8; }
+    .stats { display: flex; gap: 12px; padding: 16px 20px; background: rgba(30,41,59,0.5); }
+    .stat { flex: 1; padding: 12px; border-radius: 16px; text-align: center; }
+    .stat.free { background: rgba(16,185,129,0.2); border: 1px solid rgba(16,185,129,0.3); }
+    .stat.busy { background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.3); }
+    .stat.appt { background: rgba(147,51,234,0.2); border: 1px solid rgba(147,51,234,0.3); }
+    .stat.done { background: rgba(59,130,246,0.2); border: 1px solid rgba(59,130,246,0.3); cursor: pointer; }
+    .stat .num { font-size: 36px; font-weight: bold; }
+    .stat.free .num { color: #34d399; }
+    .stat.busy .num { color: #fbbf24; }
+    .stat.appt .num { color: #a78bfa; }
+    .stat.done .num { color: #60a5fa; }
+    .stat .label { font-size: 14px; color: #94a3b8; }
+    .buttons { display: flex; gap: 12px; padding: 12px 20px; }
+    .buttons button { flex: 1; padding: 20px; font-size: 18px; border: none; border-radius: 16px; cursor: pointer; }
+    .btn-add { background: #334155; color: white; border: 1px solid #475569 !important; }
+    .btn-customer { background: linear-gradient(to right, #f97316, #f59e0b); color: white; box-shadow: 0 8px 20px rgba(249,115,22,0.3); }
+    .btn-customer:disabled { background: #334155; color: #64748b; box-shadow: none; }
+    .btn-appt { background: #7c3aed; color: white; }
+    .btn-clear { background: #334155; color: white; padding: 20px 16px !important; flex: none !important; }
+    .appt-list { margin: 0 20px 12px; padding: 16px; background: rgba(126,34,206,0.2); border-radius: 16px; border: 1px solid rgba(147,51,234,0.3); }
+    .appt-list h3 { color: #c4b5fd; margin-bottom: 12px; font-size: 16px; }
+    .appt-item { display: flex; justify-content: space-between; align-items: center; background: rgba(126,34,206,0.2); padding: 12px; border-radius: 12px; margin-bottom: 8px; }
+    .appt-item:last-child { margin-bottom: 0; }
+    .appt-item.soon { background: rgba(245,158,11,0.3); border: 1px solid rgba(245,158,11,0.5); }
+    .appt-item.now { background: rgba(239,68,68,0.3); border: 1px solid rgba(239,68,68,0.5); }
+    .appt-time { font-size: 20px; font-weight: bold; color: #e9d5ff; }
+    .appt-info { color: #c4b5fd; margin-left: 12px; }
+    .appt-btns { display: flex; gap: 8px; }
+    .btn-start { background: #10b981; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; }
+    .staff-list { padding: 0 20px 20px; flex: 1; overflow-y: auto; }
+    .staff-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-radius: 16px; margin-bottom: 12px; }
+    .staff-item.free { background: linear-gradient(to right, rgba(16,185,129,0.3), rgba(16,185,129,0.1)); border: 2px solid rgba(16,185,129,0.5); }
+    .staff-item.busy { background: linear-gradient(to right, rgba(245,158,11,0.3), rgba(245,158,11,0.1)); border: 2px solid rgba(245,158,11,0.5); }
+    .staff-left { display: flex; align-items: center; gap: 16px; }
+    .staff-num { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; color: white; }
+    .staff-item.free .staff-num { background: #10b981; }
+    .staff-item.busy .staff-num { background: #f59e0b; }
+    .staff-name { font-size: 24px; font-weight: 600; }
+    .staff-status { font-size: 16px; }
+    .staff-item.free .staff-status { color: #34d399; }
+    .staff-item.busy .staff-status { color: #fbbf24; }
+    .staff-btns { display: flex; gap: 8px; }
+    .staff-btns button { padding: 10px 16px; border: none; border-radius: 12px; font-size: 16px; cursor: pointer; }
+    .btn-finish { background: #10b981; color: white; }
+    .btn-assign { background: #3b82f6; color: white; }
+    .btn-del { background: #475569; color: white; }
+    .empty { text-align: center; padding: 60px 20px; color: #64748b; }
+    .empty-icon { font-size: 60px; margin-bottom: 16px; }
+    .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 100; backdrop-filter: blur(4px); }
+    .modal-box { background: #1e293b; padding: 24px; border-radius: 24px; width: 100%; max-width: 400px; border: 1px solid #334155; }
+    .modal-box h2 { font-size: 24px; margin-bottom: 16px; }
+    .modal-box input, .modal-box select { width: 100%; padding: 16px; font-size: 18px; background: #334155; border: 2px solid #475569; border-radius: 16px; color: white; margin-bottom: 16px; }
+    .modal-box input:focus, .modal-box select:focus { outline: none; border-color: #14b8a6; }
+    .modal-btns { display: flex; gap: 12px; }
+    .modal-btns button { flex: 1; padding: 14px; font-size: 18px; border: none; border-radius: 16px; cursor: pointer; }
+    .btn-cancel { background: #475569; color: white; }
+    .btn-confirm { background: #14b8a6; color: white; font-weight: 600; }
+    .btn-purple { background: #7c3aed; }
+    .duration-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+    .duration-btn { padding: 16px; font-size: 20px; background: #334155; border: 2px solid #475569; border-radius: 12px; color: white; cursor: pointer; }
+    .duration-btn:hover, .duration-btn.active { background: #14b8a6; border-color: #14b8a6; }
+    .custom-row { display: flex; gap: 8px; margin-bottom: 16px; }
+    .custom-row input { flex: 1; margin-bottom: 0; }
+    .custom-row button { padding: 16px 24px; background: #14b8a6; border: none; border-radius: 12px; color: white; font-size: 18px; cursor: pointer; }
+    .appt-warning { background: rgba(126,34,206,0.3); border: 1px solid rgba(147,51,234,0.5); padding: 12px; border-radius: 12px; margin-bottom: 16px; }
+    .appt-warning p { color: #c4b5fd; font-size: 14px; margin-bottom: 4px; }
+    .appt-warning .item { color: #e9d5ff; }
+    .form-label { color: #94a3b8; font-size: 14px; margin-bottom: 8px; display: block; }
+    .history-item { display: flex; justify-content: space-between; background: rgba(51,65,85,0.5); padding: 16px; border-radius: 12px; margin-bottom: 8px; }
+    .history-total { margin-top: 16px; padding-top: 16px; border-top: 1px solid #475569; text-align: right; }
+    .history-total span { font-size: 24px; font-weight: bold; color: #60a5fa; }
+    .modal-scroll { max-height: 60vh; overflow-y: auto; }
+    .appt-badge { background: #7c3aed; color: white; font-size: 12px; padding: 2px 8px; border-radius: 8px; margin-left: 8px; font-weight: normal; }
+    .staff-appts { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .staff-appt-tag { background: rgba(147,51,234,0.3); color: #c4b5fd; font-size: 14px; padding: 4px 10px; border-radius: 8px; border: 1px solid rgba(147,51,234,0.4); }
+    .staff-appt-tag.soon { background: rgba(245,158,11,0.4); color: #fcd34d; border-color: rgba(245,158,11,0.6); }
+    .staff-appt-tag.now { background: rgba(239,68,68,0.5); color: #fca5a5; border-color: rgba(239,68,68,0.7); }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div><h1>云亭排班</h1><div class="sub">The Cloud Pavilion</div></div>
+    <div class="clock"><div class="time" id="clock">--:--</div><div class="date" id="date">--</div></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat free"><div class="num" id="freeCount">0</div><div class="label">空闲</div></div>
+    <div class="stat busy"><div class="num" id="busyCount">0</div><div class="label">服务中</div></div>
+    <div class="stat appt"><div class="num" id="apptCount">0</div><div class="label">预约</div></div>
+    <div class="stat done" onclick="showHistory()"><div class="num" id="doneCount">0</div><div class="label">已完成</div></div>
+  </div>
+
+  <div class="buttons">
+    <button class="btn-add" onclick="showAddModal()">＋ 员工</button>
+    <button class="btn-customer" id="customerBtn" onclick="customerArrived()">👤 来客人了</button>
+    <button class="btn-appt" onclick="showApptModal()">📅 预约</button>
+    <button class="btn-clear" onclick="clearToday()">🗑</button>
+  </div>
+
+  <div id="apptList"></div>
+  <div class="staff-list" id="staffList"></div>
+
+  <div class="modal" id="addModal" style="display:none">
+    <div class="modal-box">
+      <h2>添加员工</h2>
+      <input type="text" id="newName" placeholder="输入姓名" onkeydown="if(event.key==='Enter')addStaff()">
+      <div class="modal-btns">
+        <button class="btn-cancel" onclick="closeModal('addModal')">取消</button>
+        <button class="btn-confirm" onclick="addStaff()">确定</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="assignModal" style="display:none">
+    <div class="modal-box">
+      <h2>分配客人</h2>
+      <p style="color:#94a3b8;margin-bottom:16px">技师：<span id="assignName" style="color:white;font-weight:600"></span></p>
+      <div id="assignWarning"></div>
+      <div class="duration-grid" id="durationGrid"></div>
+      <div class="custom-row">
+        <input type="number" id="customHours" placeholder="自定义时长" step="0.5" min="0.5">
+        <button onclick="assignCustom()">确定</button>
+      </div>
+      <button class="btn-cancel" style="width:100%;padding:14px;font-size:18px;border:none;border-radius:16px;cursor:pointer" onclick="closeModal('assignModal')">取消</button>
+    </div>
+  </div>
+
+  <div class="modal" id="apptModal" style="display:none">
+    <div class="modal-box">
+      <h2>📅 添加预约</h2>
+      <label class="form-label">选择技师</label>
+      <select id="apptStaff"><option value="">-- 请选择 --</option></select>
+      <label class="form-label">预约时间</label>
+      <input type="time" id="apptTime">
+      <label class="form-label">服务时长</label>
+      <div class="duration-grid" id="apptDuration"></div>
+      <label class="form-label">备注（可选）</label>
+      <input type="text" id="apptNote" placeholder="客人姓名/电话等">
+      <div class="modal-btns">
+        <button class="btn-cancel" onclick="closeModal('apptModal')">取消</button>
+        <button class="btn-confirm btn-purple" onclick="addAppt()">确定预约</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="historyModal" style="display:none">
+    <div class="modal-box" style="max-width:500px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <h2>📊 今日完成记录</h2>
+        <button onclick="closeModal('historyModal')" style="background:none;border:none;color:white;font-size:24px;cursor:pointer">✕</button>
+      </div>
+      <div class="modal-scroll" id="historyList"></div>
+    </div>
+  </div>
+
+  <script>
+    let staff = [], appointments = [], history = [];
+    let assigningId = null, apptDuration = 1;
+
+    function load() {
+      try {
+        staff = JSON.parse(localStorage.getItem('staff') || '[]');
+        appointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+        history = JSON.parse(localStorage.getItem('history') || '[]');
+      } catch(e) {}
+    }
+
+    function save() {
+      localStorage.setItem('staff', JSON.stringify(staff));
+      localStorage.setItem('appointments', JSON.stringify(appointments));
+      localStorage.setItem('history', JSON.stringify(history));
+    }
+
+    function now() { const d = new Date(); return d.getHours() * 60 + d.getMinutes(); }
+    function today() { return new Date().toISOString().split('T')[0]; }
+    function fmtMin(m) { return String(Math.floor(m/60)).padStart(2,'0') + ':' + String(m%60).padStart(2,'0'); }
+
+    function updateClock() {
+      const d = new Date();
+      document.getElementById('clock').textContent = d.toLocaleTimeString('zh-CN', {hour:'2-digit', minute:'2-digit'});
+      document.getElementById('date').textContent = d.toLocaleDateString('zh-CN', {month:'long', day:'numeric', weekday:'long'});
+    }
+
+    function getApptStatus(appt) {
+      const [h, m] = appt.time.split(':').map(Number);
+      const apptMin = h * 60 + m;
+      const diff = apptMin - now();
+      if (diff <= 0) return 'now';
+      if (diff <= 15) return 'soon';
+      return 'normal';
+    }
+
+    function startApptService(apptId) {
+      const appt = appointments.find(a => a.id === apptId);
+      if (!appt) return;
+      const d = new Date();
+      const startTime = d.toLocaleTimeString('zh-CN', {hour:'2-digit', minute:'2-digit'});
+      staff = staff.map(x => x.id === appt.staffId ? {...x, end: now() + appt.duration * 60, startTime, duration: appt.duration} : x);
+      appointments = appointments.filter(a => a.id !== apptId);
+      save(); render();
+    }
+
+    function getSorted() {
+      return [...staff].sort((a,b) => {
+        const aFree = a.end === null, bFree = b.end === null;
+        if (aFree && !bFree) return -1;
+        if (!aFree && bFree) return 1;
+        if (aFree && bFree) return (a.lastFinished || 0) - (b.lastFinished || 0);
+        return a.end - b.end;
+      });
+    }
+
+    function render() {
+      const sorted = getSorted();
+      const todayAppts = appointments.filter(a => a.date === today());
+      const todayHist = history.filter(h => h.date === today());
+      const freeCount = staff.filter(s => s.end === null).length;
+      const busyCount = staff.filter(s => s.end !== null).length;
+      const nextFree = sorted.find(s => s.end === null);
+
+      document.getElementById('freeCount').textContent = freeCount;
+      document.getElementById('busyCount').textContent = busyCount;
+      document.getElementById('apptCount').textContent = todayAppts.length;
+      document.getElementById('doneCount').textContent = todayHist.length;
+
+      const btn = document.getElementById('customerBtn');
+      btn.disabled = !nextFree;
+
+      // 预约列表
+      let apptHtml = '';
+      if (todayAppts.length > 0) {
+        apptHtml = '<div class="appt-list"><h3>📅 今日预约</h3>';
+        todayAppts.sort((a,b) => a.time.localeCompare(b.time)).forEach(a => {
+          const status = getApptStatus(a);
+          const rowClass = status === 'now' ? 'now' : (status === 'soon' ? 'soon' : '');
+          const icon = status === 'now' ? '⏰' : (status === 'soon' ? '⚡' : '');
+          apptHtml += `<div class="appt-item ${rowClass}">
+            <div>
+              <span class="appt-time">${icon} ${a.time}</span>
+              <span class="appt-info">${a.staffName} ${a.duration}小时${a.note ? ' ('+a.note+')' : ''}</span>
+            </div>
+            <div class="appt-btns">
+              <button class="btn-start" onclick="startApptService(${a.id})">开始服务</button>
+              <button class="btn-del" onclick="deleteAppt(${a.id})">✕</button>
+            </div>
+          </div>`;
+        });
+        apptHtml += '</div>';
+      }
+      document.getElementById('apptList').innerHTML = apptHtml;
+
+      // 员工列表
+      let html = '';
+      if (sorted.length === 0) {
+        html = '<div class="empty"><div class="empty-icon">👥</div><p>点击「＋ 员工」添加今日上班人员</p></div>';
+      } else {
+        sorted.forEach((s, i) => {
+          const isFree = s.end === null;
+          const staffAppts = todayAppts.filter(a => a.staffId === s.id).sort((a,b) => a.time.localeCompare(b.time));
+          let apptTag = '';
+          if (staffAppts.length > 0) {
+            apptTag = '<div class="staff-appts">' + staffAppts.map(a => {
+              const status = getApptStatus(a);
+              const statusClass = status === 'now' ? 'now' : (status === 'soon' ? 'soon' : '');
+              const statusText = status === 'now' ? '⏰ ' : (status === 'soon' ? '⚡ ' : '📅 ');
+              return `<span class="staff-appt-tag ${statusClass}">${statusText}${a.time} ${a.duration}h${a.note ? ' '+a.note : ''}</span>`;
+            }).join('') + '</div>';
+          }
+          html += `<div class="staff-item ${isFree ? 'free' : 'busy'}">
+            <div class="staff-left">
+              <div class="staff-num">${i+1}</div>
+              <div><div class="staff-name">${s.name}${staffAppts.length > 0 ? ' <span class="appt-badge">有预约</span>' : ''}</div>
+              <div class="staff-status">${isFree ? '● 空闲' : '● ' + s.startTime + ' - ' + fmtMin(s.end) + ' (' + s.duration + 'h)'}</div>
+              ${apptTag}</div>
+            </div>
+            <div class="staff-btns">
+              ${!isFree ? '<button class="btn-finish" onclick="finish('+s.id+')">✓ 完成</button>' : ''}
+              <button class="btn-assign" onclick="showAssignModal(${s.id})">指名</button>
+              <button class="btn-del" onclick="removeStaff(${s.id})">✕</button>
+            </div>
+          </div>`;
+        });
+      }
+      document.getElementById('staffList').innerHTML = html;
+    }
+
+    function showAddModal() {
+      document.getElementById('addModal').style.display = 'flex';
+      document.getElementById('newName').value = '';
+      document.getElementById('newName').focus();
+    }
+
+    function addStaff() {
+      const name = document.getElementById('newName').value.trim();
+      if (name) {
+        staff.push({ id: Date.now(), name, end: null, lastFinished: 0 });
+        save(); render();
+      }
+      closeModal('addModal');
+    }
+
+    function removeStaff(id) {
+      const s = staff.find(x => x.id === id);
+      if (confirm('确定删除员工「' + s.name + '」吗？')) {
+        staff = staff.filter(x => x.id !== id);
+        appointments = appointments.filter(a => a.staffId !== id);
+        save(); render();
+      }
+    }
+
+    function checkConflict(staffId, hrs) {
+      const endMin = now() + hrs * 60;
+      const staffAppts = appointments.filter(a => a.staffId === staffId && a.date === today());
+      for (const appt of staffAppts) {
+        const [h, m] = appt.time.split(':').map(Number);
+        if (endMin > h * 60 + m - 30) return appt;
+      }
+      return null;
+    }
+
+    function showAssignModal(id) {
+      assigningId = id;
+      const s = staff.find(x => x.id === id);
+      document.getElementById('assignName').textContent = s.name;
+      document.getElementById('customHours').value = '';
+
+      const staffAppts = appointments.filter(a => a.staffId === id && a.date === today());
+      let warn = '';
+      if (staffAppts.length > 0) {
+        warn = '<div class="appt-warning"><p>⚠️ 该技师今日有预约：</p>';
+        staffAppts.sort((a,b) => a.time.localeCompare(b.time)).forEach(a => {
+          warn += `<div class="item">${a.time} - ${a.duration}小时${a.note ? ' ('+a.note+')' : ''}</div>`;
+        });
+        warn += '</div>';
+      }
+      document.getElementById('assignWarning').innerHTML = warn;
+
+      let btns = '';
+      [0.5, 1, 1.5, 2].forEach(h => {
+        btns += `<button class="duration-btn" onclick="assign(${h})">${h}h</button>`;
+      });
+      document.getElementById('durationGrid').innerHTML = btns;
+
+      document.getElementById('assignModal').style.display = 'flex';
+    }
+
+    function assign(hrs) {
+      const s = staff.find(x => x.id === assigningId);
+      const conflict = checkConflict(assigningId, hrs);
+      if (conflict) {
+        alert('⚠️ 无法分配！\n\n' + s.name + ' 在 ' + conflict.time + ' 有预约\n服务 ' + hrs + ' 小时会产生冲突\n\n请选择更短的时长或换其他技师');
+        return;
+      }
+      const d = new Date();
+      const startTime = d.toLocaleTimeString('zh-CN', {hour:'2-digit', minute:'2-digit'});
+      staff = staff.map(x => x.id === assigningId ? {...x, end: now() + hrs * 60, startTime, duration: hrs} : x);
+      save(); render();
+      closeModal('assignModal');
+    }
+
+    function assignCustom() {
+      const hrs = parseFloat(document.getElementById('customHours').value);
+      if (hrs > 0) assign(hrs);
+    }
+
+    function customerArrived() {
+      const nextFree = getSorted().find(s => s.end === null);
+      if (nextFree) showAssignModal(nextFree.id);
+    }
+
+    function finish(id) {
+      const s = staff.find(x => x.id === id);
+      const d = new Date();
+      history.push({
+        id: Date.now(),
+        staffName: s.name,
+        duration: s.duration || 1,
+        startTime: s.startTime || '--',
+        endTime: d.toLocaleTimeString('zh-CN', {hour:'2-digit', minute:'2-digit'}),
+        date: today()
+      });
+      staff = staff.map(x => x.id === id ? {...x, end: null, startTime: null, duration: null, lastFinished: Date.now()} : x);
+      save(); render();
+    }
+
+    function showApptModal() {
+      apptDuration = 1;
+      document.getElementById('apptTime').value = '';
+      document.getElementById('apptNote').value = '';
+
+      let opts = '<option value="">-- 请选择 --</option>';
+      staff.forEach(s => { opts += `<option value="${s.id}">${s.name}</option>`; });
+      document.getElementById('apptStaff').innerHTML = opts;
+
+      let btns = '';
+      [0.5, 1, 1.5, 2].forEach(h => {
+        btns += `<button class="duration-btn ${h === 1 ? 'active' : ''}" onclick="setApptDuration(${h}, this)">${h}h</button>`;
+      });
+      document.getElementById('apptDuration').innerHTML = btns;
+
+      document.getElementById('apptModal').style.display = 'flex';
+    }
+
+    function setApptDuration(h, btn) {
+      apptDuration = h;
+      document.querySelectorAll('#apptDuration .duration-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function addAppt() {
+      const staffId = parseInt(document.getElementById('apptStaff').value);
+      const time = document.getElementById('apptTime').value;
+      const note = document.getElementById('apptNote').value;
+      if (staffId && time) {
+        const s = staff.find(x => x.id === staffId);
+        appointments.push({ id: Date.now(), staffId, staffName: s.name, time, duration: apptDuration, note, date: today() });
+        save(); render();
+        closeModal('apptModal');
+      }
+    }
+
+    function deleteAppt(id) {
+      appointments = appointments.filter(a => a.id !== id);
+      save(); render();
+    }
+
+    function showHistory() {
+      const todayHist = history.filter(h => h.date === today());
+      let html = '';
+      if (todayHist.length === 0) {
+        html = '<p style="text-align:center;color:#64748b;padding:32px">今天还没有完成的服务</p>';
+      } else {
+        todayHist.forEach((h, i) => {
+          html += `<div class="history-item"><div><span style="color:#64748b">#${i+1}</span> <span style="font-size:20px;font-weight:600">${h.staffName}</span></div><div><span style="color:#60a5fa">${h.startTime} - ${h.endTime}</span> <span style="color:#64748b">(${h.duration}h)</span></div></div>`;
+        });
+        const total = todayHist.reduce((sum, h) => sum + h.duration, 0);
+        html += `<div class="history-total">总计：<span>${total} 小时</span></div>`;
+      }
+      document.getElementById('historyList').innerHTML = html;
+      document.getElementById('historyModal').style.display = 'flex';
+    }
+
+    function clearToday() {
+      if (confirm('确定清空今日所有数据？')) {
+        staff = staff.map((s, i) => ({...s, end: null, startTime: null, duration: null, lastFinished: i}));
+        appointments = appointments.filter(a => a.date !== today());
+        history = history.filter(h => h.date !== today());
+        save(); render();
+      }
+    }
+
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+    load();
+    render();
+    updateClock();
+    setInterval(updateClock, 1000);
+    setInterval(render, 30000);
+  </script>
+</body>
+</html>
