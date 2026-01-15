@@ -19,6 +19,7 @@ The Cloud Pavilion Wellness Centre is a professional health and wellness facilit
 
 ## 💆 Our Services
 
+- **Massage therapy** - Therapeutic massage to relieve muscle tension, improve circulation, and promote overall relaxation and wellness.
 - **Tuina** - Traditional Chinese therapeutic massage
 - **Acupuncture** - Traditional Chinese medicine treatment
 - **Osteopathic** - Musculoskeletal system treatment
