@@ -4,15 +4,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Cloud Pavilion Wellness Centre - Premium Health & Wellness Services</title>
+    <meta name="description"
+        content="The Cloud Pavilion Wellness Centre — Premium traditional therapy in Scarborough. Tuina, Acupuncture, Shiatsu, Reflexology, Cupping & more. Insurance accepted.">
+    <title>The Cloud Pavilion Wellness Centre · Premium Wellness in Scarborough</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-inner">
+            <span class="top-bar-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                Open Daily · 10:00 AM – 9:30 PM
+            </span>
+            <span class="top-bar-divider">|</span>
+            <span class="top-bar-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                    </path>
+                </svg>
+                <a href="tel:+14162924035">(416) 292-4035</a>
+            </span>
+            <span class="top-bar-divider hide-mobile">|</span>
+            <span class="top-bar-item hide-mobile">Insurance Direct Billing Available</span>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <div class="logo">Cloud Pavilion Wellness Centre</div>
+            <a href="#home" class="logo-wrap">
+                <span class="logo-mark">CP</span>
+                <span class="logo-text">
+                    <span class="logo-title">Cloud Pavilion</span>
+                    <span class="logo-sub">Wellness Centre</span>
+                </span>
+            </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
@@ -30,68 +73,172 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <div class="hero-image"></div>
+        <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1>Welcome to The Cloud Pavilion Wellness Centre</h1>
-            <p>Dedicated to holistic health and professional wellness guidance</p>
+            <span class="hero-eyebrow">Est. 2018 · Scarborough, ON</span>
+            <h1>Restore Balance.<br><em>Reclaim Wellness.</em></h1>
+            <p>A sanctuary of time-honoured healing traditions — where Eastern therapeutic mastery meets modern clinical
+                care.</p>
 
-            <!-- Insurance Badge -->
-            <div class="insurance-badge">
-                <span class="insurance-text">
-                    ✓ Insurance Accepted
-                </span>
+            <div class="hero-actions">
+                <a href="#services" class="btn-primary">Explore Services</a>
+                <a href="tel:+14162924035" class="btn-secondary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                        </path>
+                    </svg>
+                    (416) 292-4035
+                </a>
             </div>
 
-            <a href="#services" class="btn-primary">Explore Services</a>
+            <div class="hero-badges">
+                <span class="hero-badge">✓ Insurance Accepted</span>
+                <span class="hero-badge">✓ Direct Billing</span>
+                <span class="hero-badge">✓ Registered Practitioners</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Strip -->
+    <section class="stats">
+        <div class="container stats-grid">
+            <div class="stat">
+                <span class="stat-number">7+</span>
+                <span class="stat-label">Years of Experience</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">7</span>
+                <span class="stat-label">Therapeutic Modalities</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">5,000+</span>
+                <span class="stat-label">Sessions Delivered</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">7 Days</span>
+                <span class="stat-label">Open Every Week</span>
+            </div>
         </div>
     </section>
 
     <!-- Services Section -->
     <section class="services" id="services">
         <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <p class="section-subtitle">Comprehensive wellness solutions for your health journey</p>
+            <span class="section-eyebrow">What We Offer</span>
+            <h2 class="section-title">Therapeutic Services</h2>
+            <p class="section-subtitle">A curated selection of traditional and contemporary treatments — each designed
+                to restore harmony between body and mind.</p>
 
             <div class="services-grid">
                 <div class="service-card">
-                    <h3>Massage therapy</h3>
-                    <p>Professional therapeutic massage to relieve muscle tension, improve circulation, and promote
-                        overall relaxation and wellness.</p>
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 6L9 17l-5-5"></path>
+                            <circle cx="12" cy="12" r="10" stroke-dasharray="2 3"></circle>
+                        </svg>
+                    </div>
+                    <h3>Massage Therapy</h3>
+                    <p>Professional therapeutic massage to relieve muscle tension, improve circulation, and promote deep
+                        relaxation and overall wellness.</p>
                 </div>
 
                 <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2C8 6 6 10 6 14a6 6 0 0 0 12 0c0-4-2-8-6-12z"></path>
+                            <path d="M12 22v-8"></path>
+                        </svg>
+                    </div>
                     <h3>Tuina</h3>
-                    <p>Traditional Chinese therapeutic massage that uses rhythmic compression along energy channels to
+                    <p>Traditional Chinese therapeutic massage using rhythmic compression along energy channels to
                         promote healing and restore balance.</p>
                 </div>
 
                 <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <line x1="12" y1="3" x2="12" y2="6"></line>
+                            <line x1="12" y1="18" x2="12" y2="21"></line>
+                            <line x1="3" y1="12" x2="6" y2="12"></line>
+                            <line x1="18" y1="12" x2="21" y2="12"></line>
+                        </svg>
+                    </div>
                     <h3>Shiatsu</h3>
-                    <p>Japanese pressure point therapy that applies finger pressure to specific points to balance energy
-                        flow and promote healing.</p>
+                    <p>Japanese pressure point therapy applying focused finger pressure to specific meridians to balance
+                        energy flow and stimulate healing.</p>
                 </div>
 
                 <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M8 2c0 4 1 8 4 12 3-4 4-8 4-12"></path>
+                            <path d="M6 14c0 4 2 8 6 8s6-4 6-8"></path>
+                        </svg>
+                    </div>
                     <h3>Foot Reflexology</h3>
-                    <p>Specialized foot massage targeting reflex points that correspond to different body organs and
-                        systems for improved wellness.</p>
+                    <p>Targeted foot massage stimulating reflex points connected to body organs and systems, supporting
+                        whole-body wellness and vitality.</p>
                 </div>
 
                 <div class="service-card">
-                    <h3>Scraping (Gua Sha)</h3>
-                    <p>Traditional healing technique using smooth-edged tools to improve circulation, release muscle
-                        tension, and promote detoxification.</p>
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 12c0-3 2-5 5-5s5 2 5 5-2 5-5 5"></path>
+                            <path d="M11 12c0-3 2-5 5-5s5 2 5 5-2 5-5 5"></path>
+                        </svg>
+                    </div>
+                    <h3>Gua Sha (Scraping)</h3>
+                    <p>Traditional healing technique using smooth-edged tools to improve circulation, release fascia
+                        tension, and promote natural detoxification.</p>
                 </div>
 
                 <div class="service-card">
-                    <h3>Cupping</h3>
-                    <p>Ancient therapy using suction cups to increase blood flow, reduce inflammation, and relieve
-                        muscle tension and pain.</p>
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <circle cx="12" cy="12" r="9" stroke-dasharray="2 2"></circle>
+                        </svg>
+                    </div>
+                    <h3>Cupping Therapy</h3>
+                    <p>Time-honoured suction therapy that increases blood flow, reduces inflammation, and releases deep
+                        muscular tension and chronic pain.</p>
                 </div>
 
                 <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="19" x2="19" y2="5"></line>
+                            <circle cx="5" cy="19" r="2"></circle>
+                            <circle cx="19" cy="5" r="2"></circle>
+                        </svg>
+                    </div>
                     <h3>Acupuncture</h3>
-                    <p>Traditional Chinese medicine technique using fine needles at specific points to restore energy
-                        balance and promote natural healing.</p>
+                    <p>Classical Chinese medicine using ultra-fine needles at precise meridian points to restore energy
+                        balance and activate natural healing.</p>
+                </div>
+
+                <div class="service-card service-card-feature">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"></path>
+                        </svg>
+                    </div>
+                    <h3>Personalized Consultation</h3>
+                    <p>Not sure what you need? Our practitioners will assess your concerns and craft a tailored
+                        treatment plan just for you.</p>
                 </div>
             </div>
         </div>
@@ -100,195 +247,223 @@
     <!-- Pricing Section -->
     <section class="pricing" id="pricing">
         <div class="container">
-            <h2 class="section-title">Our Pricing</h2>
-            <p class="section-subtitle">Simple and transparent pricing based on session duration</p>
+            <span class="section-eyebrow">Transparent Rates</span>
+            <h2 class="section-title">Pricing & Packages</h2>
+            <p class="section-subtitle">Honest, straightforward pricing based on session duration — no hidden fees, no
+                surprises.</p>
 
-            <!-- Regular Price Table -->
-            <div class="price-table">
+            <div class="pricing-grid">
+                <!-- Regular Pricing -->
+                <div class="price-table">
+                    <div class="price-header primary-gradient">
+                        <span class="price-tag">Standard</span>
+                        <h3>Regular Pricing</h3>
+                        <p>All services at standard rates</p>
+                    </div>
 
-                <!-- Regular Pricing Header -->
-                <div class="price-header primary-gradient">
-                    <h3>Regular Pricing</h3>
-                    <p>All services available at standard rates</p>
-                </div>
-
-                <table class="price-list">
-                    <tr>
-                        <td class="service-name">30 Minutes Session</td>
-                        <td class="service-price">$40</td>
-                    </tr>
-                    <tr class="alt-row">
-                        <td class="service-name">45 Minutes Session</td>
-                        <td class="service-price">$45</td>
-                    </tr>
-                    <tr>
-                        <td class="service-name">60 Minutes Session</td>
-                        <td class="service-price">$50</td>
-                    </tr>
-                    <tr class="alt-row">
-                        <td class="service-name">90 Minutes Session</td>
-                        <td class="service-price">$75</td>
-                    </tr>
-                </table>
-
-                <!-- Available Services -->
-                <div style="padding: 1.5rem; background: var(--light-bg); text-align: center;">
-                    <p style="color: var(--text-dark); font-weight: 500; margin-bottom: 0.5rem;">
-                        Available Services:
-                    </p>
-                    <p style="color: var(--text-light); margin: 0; font-size: 0.95rem;">
-                        Massage • Tuina • Shiatsu • Foot Reflexology • Cupping • Scraping (Gua Sha) • Acupuncture
-                    </p>
-                </div>
-            </div>
-
-            <!-- COMBO PACKAGES -->
-            <div class="price-table">
-                <div class="price-header primary-gradient">
-                    <h3>Combo Packages</h3>
-                    <p>Whole Body + Foot Reflexology</p>
-                </div>
-
-                <table class="price-list">
-                    <tr>
-                        <td class="service-name">30 mins Whole Body + 30 mins Foot</td>
-                        <td class="service-price">$50.0</td>
-                    </tr>
-                    <tr class="alt-row">
-                        <td class="service-name">45 mins Whole Body + 45 mins Foot</td>
-                        <td class="service-price">$75.0</td>
-                    </tr>
-                    <tr>
-                        <td class="service-name">45 mins Whole Body + 30 mins Foot</td>
-                        <td class="service-price">$65.0</td>
-                    </tr>
-                    <tr class="alt-row">
-                        <td class="service-name">60 mins Whole Body + 30 mins Foot</td>
-                        <td class="service-price">$75.0</td>
-                    </tr>
-                </table>
-            </div>
-
-
-
-            <!-- Insurance Price Table -->
-            <div class="price-table insurance-table">
-
-                <!-- Insurance Services Header -->
-                <div class="price-header insurance-gradient">
-                    <h3>💳 Insurance Pricing</h3>
-                    <p>For Massage Therapy (RMT) & Acupuncture</p>
-                </div>
-
-                <table class="price-list">
-                    <thead>
-                        <tr class="table-header">
-                            <th>Duration</th>
-                            <th>Insurance Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                    <table class="price-list">
                         <tr>
                             <td class="service-name">30 Minutes</td>
-                            <td
-                                style="text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">
-                                $60</td>
+                            <td class="service-price">$40</td>
                         </tr>
                         <tr class="alt-row">
                             <td class="service-name">45 Minutes</td>
-                            <td
-                                style="text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">
-                                $80</td>
+                            <td class="service-price">$45</td>
                         </tr>
                         <tr>
                             <td class="service-name">60 Minutes</td>
-                            <td
-                                style="text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">
-                                $100</td>
+                            <td class="service-price">$50</td>
+                        </tr>
+                        <tr class="alt-row">
+                            <td class="service-name">90 Minutes</td>
+                            <td class="service-price">$75</td>
+                        </tr>
+                    </table>
+
+                    <div class="price-footer">
+                        <p class="price-footer-title">Available For</p>
+                        <p class="price-footer-text">Massage · Tuina · Shiatsu · Reflexology · Cupping · Gua Sha ·
+                            Acupuncture</p>
+                    </div>
+                </div>
+
+                <!-- Combo Packages -->
+                <div class="price-table price-table-featured">
+                    <div class="featured-ribbon">Most Popular</div>
+                    <div class="price-header gold-gradient">
+                        <span class="price-tag">Best Value</span>
+                        <h3>Combo Packages</h3>
+                        <p>Whole Body + Foot Reflexology</p>
+                    </div>
+
+                    <table class="price-list">
+                        <tr>
+                            <td class="service-name">30 min Body <span class="combo-plus">+</span> 30 min Foot</td>
+                            <td class="service-price">$50</td>
+                        </tr>
+                        <tr class="alt-row">
+                            <td class="service-name">45 min Body <span class="combo-plus">+</span> 30 min Foot</td>
+                            <td class="service-price">$65</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">45 min Body <span class="combo-plus">+</span> 45 min Foot</td>
+                            <td class="service-price">$75</td>
+                        </tr>
+                        <tr class="alt-row">
+                            <td class="service-name">60 min Body <span class="combo-plus">+</span> 30 min Foot</td>
+                            <td class="service-price">$75</td>
+                        </tr>
+                    </table>
+
+                    <div class="price-footer">
+                        <p class="price-footer-title">A Complete Reset</p>
+                        <p class="price-footer-text">Two therapies, one seamless session — our most-requested experience.</p>
+                    </div>
+                </div>
+
+                <!-- Insurance Pricing -->
+                <div class="price-table insurance-table">
+                    <div class="price-header insurance-gradient">
+                        <span class="price-tag">Insurance</span>
+                        <h3>Insurance Pricing</h3>
+                        <p>RMT Massage & Acupuncture</p>
+                    </div>
+
+                    <table class="price-list">
+                        <tr>
+                            <td class="service-name">30 Minutes</td>
+                            <td class="service-price insurance-price">$60</td>
+                        </tr>
+                        <tr class="alt-row">
+                            <td class="service-name">45 Minutes</td>
+                            <td class="service-price insurance-price">$80</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">60 Minutes</td>
+                            <td class="service-price insurance-price">$100</td>
                         </tr>
                         <tr class="alt-row">
                             <td class="service-name">75 Minutes</td>
-                            <td
-                                style="text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">
-                                $120</td>
+                            <td class="service-price insurance-price">$120</td>
                         </tr>
                         <tr>
                             <td class="service-name">90 Minutes</td>
-                            <td
-                                style="text-align: right; color: var(--primary-color); font-weight: 600; font-size: 1.2rem;">
-                                $140</td>
+                            <td class="service-price insurance-price">$140</td>
                         </tr>
-                    </tbody>
-                </table>
+                    </table>
 
-                <!-- Insurance Notice -->
-                <div class="insurance-notice">
-                    <p class="notice-title">✅ <strong>Direct Billing Available</strong></p>
-                    <p class="notice-text">
-                        Insurance accepted for <strong>Massage Therapy (RMT)</strong> and <strong>Acupuncture</strong>
-                        only.<br>
-                        Please bring your insurance information for verification.
-                    </p>
+                    <div class="price-footer insurance-notice">
+                        <p class="price-footer-title">✓ Direct Billing Available</p>
+                        <p class="price-footer-text">For Massage Therapy (RMT) and Acupuncture. Please bring your
+                            insurance information for verification.</p>
+                    </div>
                 </div>
             </div>
         </div>
-        </div>
     </section>
 
-<!-- About Section -->
-<section class="about" id="about">
-    <div class="about-content">
-        <div class="about-text page-transition">
-            <h2>About The Cloud Pavilion Wellness Centre</h2>
-            <p>Established in 2018 in Scarborough, The Cloud Pavilion Wellness Centre specializes in traditional 
-                therapeutic treatments and holistic wellness services. We are committed to helping our community 
-                achieve optimal health through time-honored healing practices.</p>
-            <p>Our skilled practitioners offer a comprehensive range of therapeutic services including Traditional 
-                Chinese Tuina Massage, Osteopathic Manual Therapy, Japanese Shiatsu Therapy, Foot Reflexology, 
-                Gua Sha (Scraping Therapy), Cupping Therapy, and Acupuncture. Each treatment is tailored to address 
-                your specific health concerns, whether you're seeking pain relief, stress reduction, improved 
-                circulation, or overall wellness maintenance.</p>
-            <p>At The Cloud Pavilion Wellness Centre, we believe in treating the whole person—not just symptoms. 
-                Through our therapeutic approach, we help restore balance, promote natural healing, and support 
-                your journey to lasting wellness.</p>
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container about-content">
+            <div class="about-text">
+                <span class="section-eyebrow">Our Philosophy</span>
+                <h2>A sanctuary built on <em>tradition,</em><br>refined by <em>care.</em></h2>
+                <p>Established in 2018 in the heart of Scarborough, The Cloud Pavilion Wellness Centre brings together
+                    time-honoured Eastern healing traditions and modern clinical standards — under one calm,
+                    purpose-built roof.</p>
+                <p>Our practitioners specialize in Traditional Chinese Tuina, Osteopathic Manual Therapy, Japanese
+                    Shiatsu, Foot Reflexology, Gua Sha, Cupping, and Acupuncture. Every treatment is tailored to your
+                    body, your concerns, and your goals — whether you seek pain relief, stress reduction, or deeper
+                    wellness.</p>
+                <p>We don't treat symptoms in isolation. We restore balance, support the body's innate healing
+                    intelligence, and walk alongside you on a path to lasting wellbeing.</p>
+
+                <div class="about-features">
+                    <div class="about-feature">
+                        <span class="about-feature-num">01</span>
+                        <div>
+                            <h4>Trained Practitioners</h4>
+                            <p>Years of clinical experience in traditional therapies.</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <span class="about-feature-num">02</span>
+                        <div>
+                            <h4>Personalized Care</h4>
+                            <p>Treatments tailored to your unique body and concerns.</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <span class="about-feature-num">03</span>
+                        <div>
+                            <h4>Serene Environment</h4>
+                            <p>A calm, clean space designed to support deep healing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="./img/thumbnail_image3.jpg" alt="The Cloud Pavilion Wellness Centre interior">
+                <div class="about-image-accent"></div>
+            </div>
         </div>
-        <div class="about-image">
-            <img src="./img/thumbnail_image3.jpg" alt="Wellness Services">
-        </div>
-    </div>
-</section>
+    </section>
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
-            <h2 class="section-title">Contact Us</h2>
-            <p class="section-subtitle">Schedule a consultation and begin your wellness journey</p>
+            <span class="section-eyebrow">Get in Touch</span>
+            <h2 class="section-title">Begin Your Wellness Journey</h2>
+            <p class="section-subtitle">We're here to answer your questions and help you book your first session.</p>
 
-            <div class="contact-info">
-                <div class="contact-item">
-                    <h3>📍 Location</h3>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                    <h3>Visit Us</h3>
                     <p class="contact-detail">
                         8 Glen Watford Dr G55<br>
                         Scarborough, ON, M1S 2C1<br>
                         Canada
                     </p>
                     <a href="https://www.google.com/maps/search/?api=1&query=8+Glen+Watford+Dr+G55+Scarborough+ON+M1S+2C1"
-                        target="_blank" class="btn-directions">
-                        📍 Get Directions
+                        target="_blank" rel="noopener" class="btn-link">
+                        Get Directions →
                     </a>
                 </div>
 
-                <div class="contact-item">
-                    <h3>📞 Phone</h3>
-                    <a href="tel:+14162924035" class="phone-number">
-                        (416) 292-4035
-                    </a>
+                <div class="contact-card contact-card-primary">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3>Call to Book</h3>
+                    <a href="tel:+14162924035" class="phone-number">(416) 292-4035</a>
+                    <p class="contact-detail-small">Walk-ins welcome · Appointments preferred</p>
                 </div>
 
-                <div class="contact-item">
-                    <h3>🕐 Business Hours</h3>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Hours</h3>
                     <p class="contact-detail">
-                        Monday - Sunday: 10:00 AM - 9:30 PM<br>
+                        <strong>Monday – Sunday</strong><br>
+                        10:00 AM – 9:30 PM<br>
+                        <span class="contact-detail-accent">Open Every Day</span>
                     </p>
                 </div>
             </div>
@@ -298,14 +473,51 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <h3 class="logo">The Cloud Pavilion Wellness Centre</h3>
-            <p>Address: 8 Glen Watford Dr G55, Scarborough, ON, M1S 2C1, Canada | Phone: (416) 292-4035</p>
-            <div class="social-links">
-                <a href="#">📧</a>
-                <a href="#">📱</a>
-                <a href="#">💬</a>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">
+                        <span class="logo-mark">CP</span>
+                        <span class="logo-text">
+                            <span class="logo-title">Cloud Pavilion</span>
+                            <span class="logo-sub">Wellness Centre</span>
+                        </span>
+                    </div>
+                    <p class="footer-tagline">A sanctuary of traditional healing in the heart of Scarborough.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Visit</h4>
+                    <p>8 Glen Watford Dr G55<br>Scarborough, ON, M1S 2C1<br>Canada</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p>
+                        <a href="tel:+14162924035">(416) 292-4035</a><br>
+                        Open Daily · 10 AM – 9:30 PM
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
             </div>
-            <p class="copyright">© 2025 The Cloud Pavilion Wellness Centre. All rights reserved.</p>
+
+            <div class="footer-bottom">
+                <p class="copyright">© 2025 The Cloud Pavilion Wellness Centre. All rights reserved.</p>
+                <p class="footer-meta">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <span class="footer-meta-sep">·</span>
+                    Crafted with care in Scarborough, Ontario.
+                </p>
+            </div>
         </div>
     </footer>
 
