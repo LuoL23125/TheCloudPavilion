@@ -16,6 +16,10 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Setmore Booking Widget -->
+    <script id="anywhere_book_now_script"
+        src="https://assets.setmore.com/integration/book-now/live/v1/anywhere-book-now.js" defer></script>
 </head>
 
 <body>
@@ -63,6 +67,10 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <button class="nav-cta anywhere-book-now-button"
+                data-booking-url="https://thecloudpavilionwellnesscentre.setmore.com" data-new-tab="false">
+                Book Now
+            </button>
             <div class="mobile-menu-toggle" id="mobileMenu">
                 <span></span>
                 <span></span>
@@ -82,7 +90,10 @@
                 care.</p>
 
             <div class="hero-actions">
-                <a href="#services" class="btn-primary">Explore Services</a>
+                <button id="Anywhere_button_iframe" class="btn-primary anywhere-book-now-button"
+                    data-booking-url="https://thecloudpavilionwellnesscentre.setmore.com" data-new-tab="false">
+                    Book Now
+                </button>
                 <a href="tel:+14162924035" class="btn-secondary">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -441,14 +452,24 @@
                     <div class="contact-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                             stroke-linecap="round" stroke-linejoin="round">
-                            <path
-                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-                            </path>
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
                         </svg>
                     </div>
-                    <h3>Call to Book</h3>
-                    <a href="tel:+14162924035" class="phone-number">(416) 292-4035</a>
-                    <p class="contact-detail-small">Walk-ins welcome · Appointments preferred</p>
+                    <h3>Book Online</h3>
+                    <p class="contact-detail" style="color: rgba(255,255,255,0.92); text-align:center;">
+                        Reserve your appointment in a few clicks.
+                    </p>
+                    <button class="btn-book-contact anywhere-book-now-button"
+                        data-booking-url="https://thecloudpavilionwellnesscentre.setmore.com" data-new-tab="false">
+                        Book Appointment
+                    </button>
+                    <p class="contact-detail-small">
+                        Or call <a href="tel:+14162924035" style="color:var(--gold-light); text-decoration:underline;">(416)
+                            292-4035</a>
+                    </p>
                 </div>
 
                 <div class="contact-card">
